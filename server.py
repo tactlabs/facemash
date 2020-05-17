@@ -59,7 +59,8 @@ def mainpage():
     buttonForm = ButtonForm()
 
     #load 2 different, random players from db - first one with less matches
-    player_context = [__get_random_player(match_treshold=35), __get_random_player()]
+    # player_context = [__get_random_player(match_treshold=35), __get_random_player()]
+    player_context = [__get_random_player(), __get_random_player()]
     while player_context[0].id == player_context[1].id:
         player_context[1] = __get_random_player()
 
@@ -89,10 +90,17 @@ def __get_random_player(match_treshold=None):
     count = Player.query.count()
     if match_treshold:
         rand = random.randint(0, int(count*0.01*match_treshold))
+        print('rand : ', rand)
+
         pl = Player.query.order_by(Player.matches.asc())[rand]
+        
     else:
         rand = random.randrange(1, count+1)
+        print('rand2 : ', rand)
+
         pl = Player.query.get(rand)
+
+    print('pl : ', pl.imgurl)
 
     return pl
 
@@ -133,4 +141,4 @@ manager.add_command("shell", Shell(make_context=make_shell_context))
 
 if __name__ == '__main__':
     manager.run()
-    #app.run(debug=True)
+    app.run(debug=True)

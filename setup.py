@@ -10,3 +10,5 @@ else:
 
 pip_command = [os.path.join("venv", bin, 'pip'), 'install', '-r', 'requirements.txt']
 subprocess.call(pip_command)
+
+# subprocess.call("source venv/bin/activate")
